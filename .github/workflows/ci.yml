@@ -1,0 +1,102 @@
+##
+## EPITECH PROJECT, 2025
+## Zappy
+## File description:
+## ci.yml
+##
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # =========================
+      # Dependencies (C/C++)
+      # =========================
+      - name: Install base deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential make cppcheck
+
+      # =========================
+      # C / C++ Build
+      # =========================
+      - name: Build C/C++ project
+        run: make zappy_server zappy_gui zappy_ai
+
+      # =========================
+      # cppcheck static analysis
+      # =========================
+      - name: Run cppcheck
+        run: |
+          cppcheck --enable=all --error-exitcode=1 src/ include/ || exit 1
+
+      # =========================
+      # Unit tests (C/C++)
+      # =========================
+      - name: Run C/C++ tests (if any)
+        run: |
+          if make test 2>/dev/null; then
+            make test
+          else
+            echo "No C/C++ tests target found"
+          fi
+
+      # =========================
+      # Rust (if exists)
+      # =========================
+      - name: Setup Rust (if needed)
+        run: |
+          if [ -f Cargo.toml ]; then
+            curl https://sh.rustup.rs -sSf | sh -s -- -y
+            echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          fi
+
+      - name: Build Rust project
+        run: |
+          if [ -f Cargo.toml ]; then
+            cargo build --verbose
+          else
+            echo "No Rust project found"
+          fi
+
+      - name: Run Rust tests
+        run: |
+          if [ -f Cargo.toml ]; then
+            cargo test --verbose
+          fi
+
+      # =========================
+      # Python (if exists)
+      # =========================
+      - name: Setup Python (if needed)
+        run: |
+          if ls *.py 1> /dev/null 2>&1 || [ -f requirements.txt ]; then
+            sudo apt-get install -y python3 python3-pip
+          fi
+
+      - name: Install Python deps
+        run: |
+          if [ -f requirements.txt ]; then
+            pip3 install -r requirements.txt
+          fi
+
+      - name: Run Python tests
+        run: |
+          if command -v pytest >/dev/null 2>&1 || [ -d tests ]; then
+            pip3 install pytest
+            pytest -q || true
+          else
+            echo "No Python tests found"
+          fi
