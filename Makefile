@@ -32,19 +32,19 @@ RESET	=	\033[0m
 
 all: server gui ai
 
-server:
+zappy_server:
 	@echo "$(CYAN)[Zappy]$(RESET) Building $(YELLOW)$(SERVER_BIN)$(RESET)..."
 	@$(MAKE) -C $(SERVER_DIR) --no-print-directory
 	@cp $(SERVER_DIR)/$(SERVER_BIN) ./$(SERVER_BIN)
 	@echo "$(GREEN)[✓]$(RESET) $(SERVER_BIN) built successfully."
 
-gui:
+zappy_gui:
 	@echo "$(CYAN)[Zappy]$(RESET) Building $(YELLOW)$(GUI_BIN)$(RESET)..."
 	@$(MAKE) -C $(GUI_DIR) --no-print-directory
 	@cp $(GUI_DIR)/$(GUI_BIN) ./$(GUI_BIN)
 	@echo "$(GREEN)[✓]$(RESET) $(GUI_BIN) built successfully."
 
-ai:
+zappy_ai:
 	@echo "$(CYAN)[Zappy]$(RESET) Building $(YELLOW)$(AI_BIN)$(RESET)..."
 	@$(MAKE) -C $(AI_DIR) --no-print-directory
 	@cp $(AI_DIR)/$(AI_BIN) ./$(AI_BIN)
@@ -54,15 +54,15 @@ ai:
 ## CLEAN RULES
 ##
 
-clean_server:
+clean_zappy_server:
 	@echo "$(CYAN)[Zappy]$(RESET) Cleaning $(SERVER_DIR)..."
 	@$(MAKE) -C $(SERVER_DIR) clean --no-print-directory
 
-clean_gui:
+clean_zappy_gui:
 	@echo "$(CYAN)[Zappy]$(RESET) Cleaning $(GUI_DIR)..."
 	@$(MAKE) -C $(GUI_DIR) clean --no-print-directory
 
-clean_ai:
+clean_zappy_ai:
 	@echo "$(CYAN)[Zappy]$(RESET) Cleaning $(AI_DIR)..."
 	@$(MAKE) -C $(AI_DIR) clean --no-print-directory
 
@@ -73,17 +73,17 @@ clean: clean_server clean_gui clean_ai
 ## FCLEAN RULES
 ##
 
-fclean_server:
+fclean_zappy_server:
 	@echo "$(CYAN)[Zappy]$(RESET) Full clean $(SERVER_DIR)..."
 	@$(MAKE) -C $(SERVER_DIR) fclean --no-print-directory
 	@$(RM) ./$(SERVER_BIN)
 
-fclean_gui:
+fclean_zappy_gui:
 	@echo "$(CYAN)[Zappy]$(RESET) Full clean $(GUI_DIR)..."
 	@$(MAKE) -C $(GUI_DIR) fclean --no-print-directory
 	@$(RM) ./$(GUI_BIN)
 
-fclean_ai:
+fclean_zappy_ai:
 	@echo "$(CYAN)[Zappy]$(RESET) Full clean $(AI_DIR)..."
 	@$(MAKE) -C $(AI_DIR) fclean --no-print-directory
 	@$(RM) ./$(AI_BIN)
