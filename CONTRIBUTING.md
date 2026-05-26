@@ -47,3 +47,15 @@ EOF
 
 chmod +x .git/hooks/commit-msg
 
+## Review Process
+
+Reviews must be done within 24h after the creation of the pull request during the week.
+The reviewer will have to check the CI status, correctness, tyle, architecture alignment.
+An approval will mean that the reviewer did not see any issue in the code and think that it is ready for merge.
+
+A review marked as Approved will not have any comment in it as long as it should be perfect.
+
+A review containing comments will then need changes.
+As long as a review requesting changes will have comments so that the owner of the pull request will now where the issue is.
+
+Once a pull request has 2 approved reviews, it has to be merged by the last approval.
