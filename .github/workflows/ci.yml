@@ -105,15 +105,15 @@ jobs:
             echo "No Python tests found"
           fi
 
-    mirror-to-epitech:
-      runs-on: ubuntu-latest
-      needs: build-and-check
-      steps:
-        - name: Debug context
-          run: |
-            echo "repo: ${{ github.repository }}"
-            echo "ref: ${{ github.ref }}"
-            echo "event: ${{ github.event_name }}"
+  mirror-to-epitech:
+    runs-on: ubuntu-latest
+    needs: build-and-check
+    steps:
+      - name: Debug context
+        run: |
+          echo "repo: ${{ github.repository }}"
+          echo "ref: ${{ github.ref }}"
+          echo "event: ${{ github.event_name }}"
 
   # mirror-to-epitech:
   #   runs-on: ubuntu-latest
