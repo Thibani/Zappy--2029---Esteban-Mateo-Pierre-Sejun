@@ -111,7 +111,7 @@ jobs:
     if: |
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push' &&
-      github.repository == 'EpitechPGE2-2025/G-YEP-400-STG-4-1-zappy-2'
+      github.repository == 'Thibani/Zappy--2029---Triple-triton-trip-de-titanesque-'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
