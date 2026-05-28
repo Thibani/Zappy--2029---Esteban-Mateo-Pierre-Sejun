@@ -45,11 +45,13 @@ jobs:
       - name: Run cppcheck
         run: |
           cppcheck --enable=all --error-exitcode=1 \
+            --std=c++20 \
             server/src
 
           cppcheck --enable=all --error-exitcode=1 \
-            -I /usr/local/include \
-            -I /usr/include/c++/13 \
+            --std=c++20 \
+            --suppress=missingIncludeSystem \
+            --suppress=unmatchedSuppression \
             gui/src
 
       # =========================
