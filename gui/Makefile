@@ -14,7 +14,7 @@ CXXFLAGS	=	-Wall -Wextra -Werror -std=c++20
 CXXFLAGS	+=	-I./include
 
 # SFML — links graphics, window, system, and network for TCP socket
-LDFLAGS		=	-lsfml-graphics -lsfml-window -lsfml-system -lsfml-network
+LDFLAGS     =   -lraylib -lm
 
 # Directories
 SRC_DIR		=	src
