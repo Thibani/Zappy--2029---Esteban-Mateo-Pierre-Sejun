@@ -44,16 +44,13 @@ jobs:
       # =========================
       - name: Run cppcheck
         run: |
-          for dir in server gui; do
-            for sub in src include; do
-              if [ -d "$dir/$sub" ]; then
-                cppcheck --enable=all --error-exitcode=1 \
-                  --suppress=missingIncludeSystem \
-                  -I /usr/local/include \
-                  "$dir/$sub"
-              fi
-            done
-          done
+          cppcheck --enable=all --error-exitcode=1 \
+            server/src
+
+          cppcheck --enable=all --error-exitcode=1 \
+            -I /usr/local/include \
+            -I /usr/include/c++/13 \
+            gui/src
 
       # =========================
       # Unit tests (C/C++)
